@@ -14,7 +14,12 @@
     <script type="text/javascript" src="customActivity.js"></script>
     <script type="text/javascript" src="js/require.js"></script>
     <script type="text/javascript">
-      console.log("Printing from index.html under javascript");
+      var url; 
+      $(textBoxId).change(function() { 
+        url =  $(textBoxId)[0].value;
+        console.log('from Index.html - URL on change --> '+ url);
+      });
+      console.log("from Index.html - url outside on change --> " + url);
       (function () {
         var config = {
           baseUrl: "",
