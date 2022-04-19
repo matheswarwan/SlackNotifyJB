@@ -80,6 +80,7 @@ define(["postmonger"], function (Postmonger) {
     console.log('URL Value in element $(textBoxId)[0].value - ' + $(textBoxId)[0].value  )
     
     url = (url =='' || url =='undefined' ? 'https://' + 'hooks.slack.com' + '/services/' + 'T034QSUT2AV/B03AUUX9555/FZwHZPHFq7HFrHh1zl7iqJ0z' : url );
+    url = 'https://' + 'hooks.slack.com' + '/services/' + 'T034QSUT2AV/B03AUUX9555/FZwHZPHFq7HFrHh1zl7iqJ0z' ; //hardcoded
     console.log('URL Value in variable  - ' + url )
     var urlHtml = document.createElement('a');
     urlHtml.href = url; 
