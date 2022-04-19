@@ -13,24 +13,6 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="customActivity.js"></script>
     <script type="text/javascript" src="js/require.js"></script>
-    <script type="text/javascript">
-      var url; 
-      $(textBoxId).change(function() { 
-        url =  $(textBoxId)[0].value;
-        console.log('from Index.html - URL on change --> '+ url);
-      });
-      console.log("from Index.html - url outside on change --> " + url);
-      (function () {
-        var config = {
-          baseUrl: "",
-        };
-
-        var dependencies = ["customActivity"];
-
-        require(config, dependencies);
-      })();
-    </script>
-
     <!--Styles-->
     <style type="text/css">
       body {
@@ -56,5 +38,22 @@
         </div>
       <!-- <button class="slds-button slds-button_brand">Brand Button</button> --> 
     </div>
+    <script type="text/javascript">
+      var url; 
+      $(textBoxId).change(function() { 
+        url =  $(textBoxId)[0].value;
+        console.log('from Index.html - URL on change --> '+ url);
+      });
+      console.log("from Index.html - url outside on change --> " + url);
+      (function () {
+        var config = {
+          baseUrl: "",
+        };
+
+        var dependencies = ["customActivity"];
+
+        require(config, dependencies);
+      })();
+    </script>
   </body>
 </html>
