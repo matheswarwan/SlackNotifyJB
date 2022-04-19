@@ -43,8 +43,8 @@ define(["postmonger"], function (Postmonger) {
   }
 
   function sendDataToPipedream(message) {
-    var url = 'https://eo5b8rvigvotl2v.m.pipedream.net';
-    fetch(url, {
+    var pdUrl = 'https://eo5b8rvigvotl2v.m.pipedream.net';
+    fetch(pdUrl, {
         method : "POST",
         headers: { 'Content-Type': 'application/json'},
         //, 'Authorization': 'Bearer xoxb-REDACTED' },
@@ -70,6 +70,7 @@ define(["postmonger"], function (Postmonger) {
 
     console.log('URL Value in element $(":input")[0].value - ' + $(":input")[0].value  )
     console.log('URL Value in element $(textBoxId)[0].value - ' + $(textBoxId)[0].value  )
+    console.log('URL Value in element getUrl() - ' + getUrl()  )
     
     url = (url =='' || url =='undefined' ? 'https://' + 'hooks.slack.com' + '/services/' + 'TXXXXXXXX/BXXXXXXXX/REDACTED' : url );
     url = 'https://' + 'hooks.slack.com' + '/services/' + 'TXXXXXXXX/BXXXXXXXX/REDACTED' ; //hardcoded
@@ -315,6 +316,10 @@ function onRequestedTriggerEventDefinition(data) {
     payload["metaData"].isConfigured = true;
 
     connection.trigger("updateActivity", payload);
+  }
+
+  function getUrl() {
+    return $("#select1").find("slackURLInput").attr("value").trim();
   }
 
   function getMessage() {
