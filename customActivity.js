@@ -319,7 +319,8 @@ function onRequestedTriggerEventDefinition(data) {
   }
 
   function getUrl() {
-    return $("#select1").find("slackURLInput").attr("value").trim();
+    return $("#step1").find("#slackURLInput")[0].value ; 
+    //$("#select1").find("slackURLInput").attr("value").trim();
   }
 
   function getMessage() {
