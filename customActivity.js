@@ -26,12 +26,7 @@ define(["postmonger"], function (Postmonger) {
   connection.on('requestedInteraction', onRequestedInteraction);
   connection.on('requestedTriggerEventDefinition', onRequestedTriggerEventDefinition);
 
-  const textBoxId = ":input[id=text-input-id-46]";
-  $(textBoxId).change(function() { 
-    url =  $(textBoxId)[0].value;
-    console.log('URL on change --> '+ url);
-  })
-
+  
 
 
   function getPayload(message) {
@@ -107,6 +102,13 @@ define(["postmonger"], function (Postmonger) {
   }
 
   function onRender() {
+
+    const textBoxId = "#slackURLInput";
+    $(textBoxId).change(function() { 
+      url =  $(textBoxId)[0].value;
+      console.log('URL on change --> '+ url);
+    });
+    
     console.log("[custom activity js] On render function ")
     sendDataToPipedream('Calling from OnRender method');
     // JB will respond the first time 'ready' is called with 'initActivity'
