@@ -60,14 +60,6 @@ define(["postmonger"], function (Postmonger) {
     console.log('Step details for clickedNext  ' + JSON.stringify(step) )
     $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<br> ClickedNext function called. This will "close" the activity.' 
     //connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
-    
-
-    const textBoxId = "#slackURLInput";
-    $(textBoxId).change(function() { 
-      url =  $(textBoxId)[0].value;
-      console.log('URL on change --> '+ url);
-    });
-    
 
     //payload["arguments"].execute.inArguments = [{ message: 'inArgumentValue' }];
     //Get payload details
