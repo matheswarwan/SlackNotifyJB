@@ -115,8 +115,18 @@ define(["postmonger"], function (Postmonger) {
 
     const textBoxId = "#slackURLInput";
     $(textBoxId).change(function() { 
-      url =  $(textBoxId)[0].value;
-      console.log('URL on change --> '+ url);
+      //url =  $(textBoxId)[0].value;
+      //console.log('URL on change --> '+ url);
+      var message = getUrl();
+      connection.trigger("updateButton", {
+        button: "next",
+        enabled: false,
+      });
+
+      $("#message").html(message);
+      url = message;
+      console.log("MESSAGE IN ON CHANGE AFTER CONNECT TRIGGER " + message)
+      console.log("URL IN ON CHANGE AFTER CONNECT TRIGGER " + url)
     });
     
     console.log("[custom activity js] On render function ")
