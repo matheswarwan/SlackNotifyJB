@@ -1,0 +1,77 @@
+{
+	"workflowApiVersion": "1.1",
+	"metaData": {
+	  "icon": "images/icon.png",
+	  "category": "message"
+	},
+	"type": "REST",
+	"lang": {
+	  "en-US": {
+		"name": "Slack Notify",
+		"description": "Send notification to a channel"
+	  }
+	},
+	"arguments": {
+	  "execute": {
+		"inArguments": [
+		  {
+			"emailAddress": "{{InteractionDefaults.Email}}"
+		  }
+		],
+		"outArguments": [
+		  {
+			"slackEndpoint": ""
+		  }
+		],
+		"url": "https://mc-yfyyj2sjhsjhkwc1s8w4zrxx4.pub.sfmc-content.com/rjj2hcu45qn"
+	  }
+	},
+	"configurationArguments": {
+	  "save": {
+		"url": "https://eo5b8rvigvotl2v.m.pipedream.net/save"
+	  },
+	  "publish": {
+		"url": "https://eo5b8rvigvotl2v.m.pipedream.net/publish"
+	  },
+	  "validate": {
+		"url": "https://eo5b8rvigvotl2v.m.pipedream.net/validate"
+	  },
+	  "stop": {
+		"url": "https://eo5b8rvigvotl2v.m.pipedream.net/stop"
+	  }
+	},
+	"wizardSteps": [
+		{ "label": "API Details", "key": "step1" }
+	],
+	"userInterfaces": {
+	  "configModal": {
+		"height": 400,
+		"width": 600,
+		"fullscreen": false
+	  }
+	},
+	"schema": {
+	  "arguments": {
+		"execute": {
+		  "inArguments": [
+			{
+			  "emailAddress": {
+				"dataType": "Email",
+				"isNullable": false,
+				"direction": "in"
+			  }
+			}
+		  ],
+		  "outArguments": [
+			{
+			  "slackEndpoint": {
+				"dataType": "Text",
+				"direction": "out",
+				"access": "visible"
+			  }
+			}
+		  ]
+		}
+	  }
+	}
+  }

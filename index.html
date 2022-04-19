@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Custom Journey Builder Activity</title>
+    <link rel="stylesheet" href="css/button-touch.css">
+    <link rel="stylesheet" href="css/button-index.css">
+    <link rel="stylesheet" href="css/input-index.css">
+    <link rel="stylesheet" href="css/input-index.css">
+    <link rel="stylesheet" href="css/form-element-index.css">
+    <link rel="stylesheet" href="css/form-element-index.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="customActivity.js"></script>
+    <script type="text/javascript" src="js/require.js"></script>
+    <script type="text/javascript">
+      console.log("Printing from index.html under javascript");
+      (function () {
+        var config = {
+          baseUrl: "",
+        };
+
+        var dependencies = ["customActivity"];
+
+        require(config, dependencies);
+      })();
+    </script>
+
+    <!--Styles-->
+    <style type="text/css">
+      body {
+        padding: 20px;
+        margin: 0;
+      }
+      .step {
+        display: none;
+      }
+      #step1 {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="step1" class="step">
+      <div class="slds-form-element">
+        <label class="slds-form-element__label" for="text-input-id-46">
+        <abbr class="slds-required" title="required">* </abbr>Slack Webhook API Endpoint</label>
+        <div class="slds-form-element__control">
+        <input type="text" id="text-input-id-46" placeholder="https://hooks.slack.com/services/xxx/yyy/zzz" required="" class="slds-input" />
+        </div>
+        </div>
+      <!-- <button class="slds-button slds-button_brand">Brand Button</button> --> 
+    </div>
+  </body>
+</html>
