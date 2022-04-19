@@ -61,13 +61,25 @@ define(["postmonger"], function (Postmonger) {
     $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<br> ClickedNext function called. This will "close" the activity.' 
     //connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
     
+
+    const textBoxId = "#slackURLInput";
+    $(textBoxId).change(function() { 
+      url =  $(textBoxId)[0].value;
+      console.log('URL on change --> '+ url);
+    });
+    
+
     //payload["arguments"].execute.inArguments = [{ message: 'inArgumentValue' }];
     //Get payload details
     //url = $(":input")[0].value  || document.getElementById('text-input-id-46').value || 'https://' + 'hooks.slack.com' + '/services/' + 'T034QSUT2AV/B03AUUX9555/FZwHZPHFq7HFrHh1zl7iqJ0z';
     //$('#text-input-id-46')[0].value;
     //document.getElementById('text-input-id-46').value;
-    console.log('URL Value in element  - ' + $(":input")[0].value  )
+
+
+    console.log('URL Value in element $(":input")[0].value - ' + $(":input")[0].value  )
+    console.log('URL Value in element $(textBoxId)[0].value - ' + $(textBoxId)[0].value  )
     console.log('URL Value in variable  - ' + url )
+    url = (url =='' ? 'https://' + 'hooks.slack.com' + '/services/' + 'T034QSUT2AV/B03AUUX9555/FZwHZPHFq7HFrHh1zl7iqJ0z' : url );
     var urlHtml = document.createElement('a');
     urlHtml.href = url; 
     if(urlHtml.host == 'hooks.slack.com' && urlHtml.pathname.split('/').length == 5 ) {
