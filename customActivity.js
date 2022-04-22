@@ -227,7 +227,8 @@ function onRequestedTriggerEventDefinition(data) {
   }
 
   function getUrl() {
-    return  $("#step1").find("#slackURLInput").attr("value").trim() + " ---- "  + $("#message")[0].innerHTML;
+    return  $("#slackURLInput")[0].value ;
+    //$("#step1").find("#slackURLInput").attr("value").trim() + " ---- "  + $("#message")[0].innerHTML;
     //$("#step1").find("#slackURLInput")[0].value ; 
     //$("#select1").find("slackURLInput").attr("value").trim();
   }
