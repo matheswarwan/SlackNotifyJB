@@ -64,10 +64,10 @@ define(["postmonger"], function (Postmonger) {
       var textBoxId = "#slackURLInput";
       $(textBoxId).change(function() { 
         var message = getUrl();
-        connection.trigger("updateButton", {
+        /* mk123a connection.trigger("updateButton", {
           button: "next",
           enabled: false,
-        });
+        }); */
 
         $("#message").html(message);
         url = message;
@@ -119,7 +119,7 @@ define(["postmonger"], function (Postmonger) {
 
   function clickedNext() {
     console.log('ClickedNext function called. This will "close" the activity. ');
-    $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<br> ClickedNext function called. This will "close" the activity.' 
+    $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<br> ClickedNext function called. This will "close" the activity.'  + $("#slackURLInput")[0].value ;
     //connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 
     //payload["arguments"].execute.inArguments = [{ message: 'inArgumentValue' }];
@@ -167,7 +167,8 @@ define(["postmonger"], function (Postmonger) {
     console.log('Step details for gotoStep  ' + JSON.stringify(step) )
     $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<br> gotoStep function called; value in input -> ' + $('#slackURLInput')[0].value;  
     //$(".step").hide();
-    connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
+    //mk123a connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
+    connection.trigger('updateButton', { button: 'next', text: 'done' });
     console.log('On go to step (line 70) Method')
     sendDataToPipedream('On go to step (line 70) Method')
   }
