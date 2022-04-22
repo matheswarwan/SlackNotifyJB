@@ -70,6 +70,7 @@ define(["postmonger"], function (Postmonger) {
 
     console.log('URL Value from DOM - ' + document.getElementById('slackURLInput').value)
     console.log('URL Value in element $(":input")[0].value - ' + $(":input")[0].value  )
+    var textBoxId = "#slackURLInput";
     console.log('URL Value in element $(textBoxId)[0].value - ' + $(textBoxId)[0].value  )
     console.log('URL Value in element getUrl() - ' + getUrl()  )
     
@@ -113,7 +114,7 @@ define(["postmonger"], function (Postmonger) {
 
 
 
-    const textBoxId = "#slackURLInput";
+    var textBoxId = "#slackURLInput";
     $(textBoxId).change(function() { 
       //url =  $(textBoxId)[0].value;
       //console.log('URL on change --> '+ url);
