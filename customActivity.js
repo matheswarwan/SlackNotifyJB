@@ -43,8 +43,8 @@ define(["postmonger"], function (Postmonger) {
   }
 
   function sendDataToPipedream(message) {
-    var url = 'https://eo5b8rvigvotl2v.m.pipedream.net';
-    fetch(url, {
+    var pdUrl = 'https://eo5b8rvigvotl2v.m.pipedream.net';
+    fetch(pdUrl, {
         method : "POST",
         headers: { 'Content-Type': 'application/json'},
         //, 'Authorization': 'Bearer xoxb-3160912920369-3370006260852-MIdOlFcQl4vNt1ijjvB9L8yo' },
@@ -60,14 +60,6 @@ define(["postmonger"], function (Postmonger) {
     console.log('Step details for clickedNext  ' + JSON.stringify(step) )
     $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<br> ClickedNext function called. This will "close" the activity.' 
     //connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
-    
-
-    const textBoxId = "#slackURLInput";
-    $(textBoxId).change(function() { 
-      url =  $(textBoxId)[0].value;
-      console.log('URL on change --> '+ url);
-    });
-    
 
     //payload["arguments"].execute.inArguments = [{ message: 'inArgumentValue' }];
     //Get payload details
@@ -76,8 +68,10 @@ define(["postmonger"], function (Postmonger) {
     //document.getElementById('text-input-id-46').value;
 
 
+    console.log('URL Value from DOM - ' + document.getElementById('slackURLInput').value)
     console.log('URL Value in element $(":input")[0].value - ' + $(":input")[0].value  )
     console.log('URL Value in element $(textBoxId)[0].value - ' + $(textBoxId)[0].value  )
+    console.log('URL Value in element getUrl() - ' + getUrl()  )
     
     url = (url =='' || url =='undefined' ? 'https://' + 'hooks.slack.com' + '/services/' + 'T034QSUT2AV/B03AUUX9555/FZwHZPHFq7HFrHh1zl7iqJ0z' : url );
     url = 'https://' + 'hooks.slack.com' + '/services/' + 'T034QSUT2AV/B03AUUX9555/FZwHZPHFq7HFrHh1zl7iqJ0z' ; //hardcoded
@@ -117,10 +111,22 @@ define(["postmonger"], function (Postmonger) {
 
   function onRender() {
 
+
+
     const textBoxId = "#slackURLInput";
     $(textBoxId).change(function() { 
-      url =  $(textBoxId)[0].value;
-      console.log('URL on change --> '+ url);
+      //url =  $(textBoxId)[0].value;
+      //console.log('URL on change --> '+ url);
+      var message = getUrl();
+      connection.trigger("updateButton", {
+        button: "next",
+        enabled: false,
+      });
+
+      $("#message").html(message);
+      url = message;
+      console.log("MESSAGE IN ON CHANGE AFTER CONNECT TRIGGER " + message)
+      console.log("URL IN ON CHANGE AFTER CONNECT TRIGGER " + url)
     });
     
     console.log("[custom activity js] On render function ")
@@ -323,6 +329,11 @@ function onRequestedTriggerEventDefinition(data) {
     payload["metaData"].isConfigured = true;
 
     connection.trigger("updateActivity", payload);
+  }
+
+  function getUrl() {
+    return $("#step1").find("#slackURLInput")[0].value ; 
+    //$("#select1").find("slackURLInput").attr("value").trim();
   }
 
   function getMessage() {
