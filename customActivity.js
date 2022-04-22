@@ -83,6 +83,9 @@ define(["postmonger"], function (Postmonger) {
     }
 
     function initialize(data) {
+      url = $("#slackURLInput")[0].value ;
+      $("#slackURLInput")[0].value = $("#slackURLInput")[0].value  + url; 
+
       sendDataToPipedream('Calling from Initialize method. Data received ' + JSON.stringify(data));
       console.log('Initialize method. Data received ' + JSON.stringify(data));
       
