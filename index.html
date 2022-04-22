@@ -11,8 +11,19 @@
     <link rel="stylesheet" href="css/form-element-index.css">
     <link rel="stylesheet" href="css/form-element-index.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="customActivity.js"></script>
     <script type="text/javascript" src="js/require.js"></script>
+    <script type="text/javascript">
+      (function () {
+        var config = {
+          baseUrl: "",
+        };
+
+        var dependencies = ["customActivity"];
+
+        require(config, dependencies);
+      })();
+    </script>
+    <!-- <script type="text/javascript" src="customActivity.js"></script> -->
     <!--Styles-->
     <style type="text/css">
       body {
@@ -39,14 +50,14 @@
       </div>-->
       <!-- <button class="slds-button slds-button_brand">Brand Button</button> --> 
     </div>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
       var url; 
       const textBoxId = "#slackURLInput";
       $(textBoxId).change(function() { 
         url =  $(textBoxId)[0].value;
-        console.log('from Index.html - URL on change --> '+ url);
+        console.log('from Index.html - URL on change - - > '+ url);
       });
-      console.log("from Index.html - url outside on change --> " + url);
+      console.log("from Index.html - url outside on change - - > " + url);
       (function () {
         var config = {
           baseUrl: "",
@@ -56,6 +67,6 @@
 
         require(config, dependencies);
       })();
-    </script>
+    </script> -->
   </body>
 </html>
