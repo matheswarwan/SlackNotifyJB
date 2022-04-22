@@ -11,10 +11,8 @@
     <link rel="stylesheet" href="css/form-element-index.css">
     <link rel="stylesheet" href="css/form-element-index.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="customActivity.js"></script>
     <script type="text/javascript" src="js/require.js"></script>
     <script type="text/javascript">
-      console.log("Printing from index.html under javascript");
       (function () {
         var config = {
           baseUrl: "",
@@ -25,7 +23,7 @@
         require(config, dependencies);
       })();
     </script>
-
+    <!-- <script type="text/javascript" src="customActivity.js"></script> -->
     <!--Styles-->
     <style type="text/css">
       body {
@@ -42,14 +40,33 @@
   </head>
   <body>
     <div id="step1" class="step">
-      <div class="slds-form-element">
+      <input id="slackURLInput" type="text" placeholder="https://hooks.slack.com/services/xxx/yyyv1." />
+     <!--  <div class="slds-form-element">
         <label class="slds-form-element__label" for="slackURLInput">
         <abbr class="slds-required" title="required">* </abbr>Slack Webhook API Endpoint</label>
         <div class="slds-form-element__control">
         <input type="text" id="slackURLInput" placeholder="https://hooks.slack.com/services/xxx/yyyv3" required="" class="slds-input" />
         </div>
-        </div>
+      </div>-->
       <!-- <button class="slds-button slds-button_brand">Brand Button</button> --> 
     </div>
+    <!--<script type="text/javascript">
+      var url; 
+      const textBoxId = "#slackURLInput";
+      $(textBoxId).change(function() { 
+        url =  $(textBoxId)[0].value;
+        console.log('from Index.html - URL on change - - > '+ url);
+      });
+      console.log("from Index.html - url outside on change - - > " + url);
+      (function () {
+        var config = {
+          baseUrl: "",
+        };
+
+        var dependencies = ["customActivity"];
+
+        require(config, dependencies);
+      })();
+    </script> -->
   </body>
 </html>
