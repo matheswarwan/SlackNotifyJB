@@ -1,3 +1,5 @@
+
+
 define(["postmonger"], function (Postmonger) {
   "use strict";
 
@@ -5,12 +7,12 @@ define(["postmonger"], function (Postmonger) {
 
   var connection = new Postmonger.Session();
   var payload = {};
-  var lastStepEnabled = false;
+  var lastStepEnabled = false; //?
   var steps = [
     // initialize to the same value as what's set in config.json for consistency
     { label: "API Details", key: "step1" }
-  ];
-  var currentStep = steps[0].key;
+  ]; //?
+  var currentStep = steps[0].key; //?
 
   $(window).ready(onRender);
 
@@ -26,21 +28,8 @@ define(["postmonger"], function (Postmonger) {
   connection.on('requestedInteraction', onRequestedInteraction);
   connection.on('requestedTriggerEventDefinition', onRequestedTriggerEventDefinition);
 
-  
 
-
-  function getPayload(message) {
-    var d = new Date();
-	  var journeyName = 'Welcome Journey Metrics for ' + d.toLocaleDateString('en-us' , { dateStyle: 'long' } ) ;
-    var sent = 15
-	  var opened = 8
-	  var clicked = 5
-	  var unsubscribed = 2 
-	  var bounced = 1 
-	  var payload = {} 
-	  payload['message'] = message;
-    return payload;
-  }
+  /* Helper Function declaration - Start */
 
   function sendDataToPipedream(message) {
     var pdUrl = 'https://eo5b8rvigvotl2v.m.pipedream.net';
@@ -55,6 +44,46 @@ define(["postmonger"], function (Postmonger) {
         html => console.log('Response from Slack API ' + html)
     );
   }
+
+  function getPayload(message) {
+    var d = new Date();
+    var payload = {} 
+    payload['message'] = message;
+    return payload;
+  }
+
+  /* Helper Function declaration - End */
+  /* Connection Function declaration - Start */
+    function onRender() {
+      var textBoxId = "#slackURLInput";
+      $(textBoxId).change(function() { 
+        //url =  $(textBoxId)[0].value;
+        //console.log('URL on change --> '+ url);
+        var message = getUrl();
+        connection.trigger("updateButton", {
+          button: "next",
+          enabled: false,
+        });
+
+        $("#message").html(message);
+        url = message;
+        console.log("Event Listner Added in onRender has " + message)
+        console.log("URL IN ON CHANGE AFTER CONNECT TRIGGER " + url)
+      });
+      
+      console.log("[custom activity js] On render function ")
+      sendDataToPipedream('Calling from OnRender method');
+      // JB will respond the first time 'ready' is called with 'initActivity'
+      connection.trigger("ready");
+
+      connection.trigger("requestTokens");
+      connection.trigger("requestEndpoints");
+
+    }
+
+  /* Connection Function declaration - End */
+
+
 
   function clickedNext(step) {
     console.log('Step details for clickedNext  ' + JSON.stringify(step) )
@@ -108,55 +137,6 @@ define(["postmonger"], function (Postmonger) {
     connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
     console.log('On go to step (line 70) Method')
     sendDataToPipedream('On go to step (line 70) Method')
-  }
-
-  function onRender() {
-
-
-
-    var textBoxId = "#slackURLInput";
-    $(textBoxId).change(function() { 
-      //url =  $(textBoxId)[0].value;
-      //console.log('URL on change --> '+ url);
-      var message = getUrl();
-      connection.trigger("updateButton", {
-        button: "next",
-        enabled: false,
-      });
-
-      $("#message").html(message);
-      url = message;
-      console.log("MESSAGE IN ON CHANGE AFTER CONNECT TRIGGER " + message)
-      console.log("URL IN ON CHANGE AFTER CONNECT TRIGGER " + url)
-    });
-    
-    console.log("[custom activity js] On render function ")
-    sendDataToPipedream('Calling from OnRender method');
-    // JB will respond the first time 'ready' is called with 'initActivity'
-    connection.trigger("ready");
-
-    connection.trigger("requestTokens");
-    connection.trigger("requestEndpoints");
-
-    // Disable the next button if a value isn't selected
-    $("#select1").change(function () {
-      var message = getMessage();
-      connection.trigger("updateButton", {
-        button: "next",
-        enabled: Boolean(message),
-      });
-
-      $("#message").html(message);
-    });
-
-    // Toggle step 4 active/inactive
-    // If inactive, wizard hides it and skips over it during navigation
-    $("#toggleLastStep").click(function () {
-      lastStepEnabled = !lastStepEnabled; // toggle status
-      steps[3].active = !steps[3].active; // toggle active
-
-      connection.trigger("updateSteps", steps);
-    });
   }
 
   function initialize(data) {
@@ -230,16 +210,6 @@ function onRequestedTriggerEventDefinition(data) {
   sendDataToPipedream('On Requested Trigger Event Definition')
 }
 
-  function onClickedNext() {
-    if (
-      (currentStep.key === "step3" && steps[3].active === false) ||
-      currentStep.key === "step4"
-    ) {
-      save();
-    } else {
-      connection.trigger("nextStep");
-    }
-  }
 
   function onClickedBack() {
     connection.trigger("prevStep");
@@ -247,71 +217,6 @@ function onRequestedTriggerEventDefinition(data) {
     sendDataToPipedream('On Clicked Back Method')
   }
 
-  function onGotoStep(step) {
-    showStep(step);
-    connection.trigger("ready");
-    console.log('On go to step Method')
-    sendDataToPipedream('On go to step Method')
-  }
-
-  function showStep(step, stepIndex) {
-    if (stepIndex && !step) {
-      step = steps[stepIndex - 1];
-    }
-
-    currentStep = step;
-
-    $(".step").hide();
-
-    switch (currentStep.key) {
-      case "step1":
-        $("#step1").show();
-        connection.trigger("updateButton", {
-          button: "next",
-          enabled: Boolean(getMessage()),
-        });
-        connection.trigger("updateButton", {
-          button: "back",
-          visible: false,
-        });
-        break;
-      case "step2":
-        $("#step2").show();
-        connection.trigger("updateButton", {
-          button: "back",
-          visible: true,
-        });
-        connection.trigger("updateButton", {
-          button: "next",
-          text: "next",
-          visible: true,
-        });
-        break;
-      case "step3":
-        $("#step3").show();
-        connection.trigger("updateButton", {
-          button: "back",
-          visible: true,
-        });
-        if (lastStepEnabled) {
-          connection.trigger("updateButton", {
-            button: "next",
-            text: "next",
-            visible: true,
-          });
-        } else {
-          connection.trigger("updateButton", {
-            button: "next",
-            text: "done",
-            visible: true,
-          });
-        }
-        break;
-      case "step4":
-        $("#step4").show();
-        break;
-    }
-  }
 
   function save() {
     console.log("[custom activity js] in Save function")
@@ -342,4 +247,5 @@ function onRequestedTriggerEventDefinition(data) {
     sendDataToPipedream('On get Message Method')
     return true; //$("#select1").find("option:selected").attr("value").trim();
   }
+
 });
