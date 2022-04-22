@@ -147,7 +147,7 @@ define(["postmonger"], function (Postmonger) {
       console.log('Payload on clicking  (if) ' + JSON.stringify(payload));
       console.log('On clicked Next Method - Validation Successful')
       sendDataToPipedream('On clicked Next Method - validation successful')
-      //connection.trigger("updateActivity", payload);    this runs initialised,,,
+      connection.trigger("updateActivity", payload);    //this runs initialised
     } else {
       payload.name = 'Send Message to Channel <Channel Name>';
       payload["arguments"].execute.outArguments = [{ slackEndpoint: url }];
