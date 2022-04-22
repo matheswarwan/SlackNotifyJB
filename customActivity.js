@@ -55,10 +55,14 @@ define(["postmonger"], function (Postmonger) {
   /* Helper Function declaration - End */
   /* Connection Function declaration - Start */
     function onRender() {
+      // JB will respond the first time 'ready' is called with 'initActivity'
+      connection.trigger("ready"); //Calls connection.on("initActivity", initialize);
+
+      connection.trigger("requestTokens");
+      connection.trigger("requestEndpoints");
+      
       var textBoxId = "#slackURLInput";
       $(textBoxId).change(function() { 
-        //url =  $(textBoxId)[0].value;
-        //console.log('URL on change --> '+ url);
         var message = getUrl();
         connection.trigger("updateButton", {
           button: "next",
@@ -73,12 +77,51 @@ define(["postmonger"], function (Postmonger) {
       
       console.log("[custom activity js] On render function ")
       sendDataToPipedream('Calling from OnRender method');
-      // JB will respond the first time 'ready' is called with 'initActivity'
-      connection.trigger("ready");
 
-      connection.trigger("requestTokens");
-      connection.trigger("requestEndpoints");
+    }
 
+    function initialize(data) {
+      sendDataToPipedream('Calling from Initialize method. Data received ' + data);
+      console.log('custom activity js - Initialize method. Data received ' + data);
+      
+      if (data) {
+        payload = data;
+      }
+  
+      var message;
+      var hasInArguments = Boolean(
+        payload["arguments"] &&
+          payload["arguments"].execute &&
+          payload["arguments"].execute.inArguments &&
+          payload["arguments"].execute.inArguments.length > 0
+      );
+  
+      var inArguments = hasInArguments
+        ? payload["arguments"].execute.inArguments
+        : {};
+  
+      $.each(inArguments, function (index, inArgument) {
+        $.each(inArgument, function (key, val) {
+          if (key === "message") {
+            message = val;
+          }
+        });
+      });
+  
+      console.log('custom activity js - Initialize method - Ends; Payload at the end ' + JSON.stringify(payload));
+      /* 
+      // If there is no message selected, disable the next button
+      if (!message) {
+        showStep(null, 1);
+        connection.trigger("updateButton", { button: "next", enabled: false });
+        // If there is a message, skip to the summary step
+      } else {
+        $("#select1")
+          .find("option[value=" + message + "]")
+          .attr("selected", "selected");
+        $("#message").html(message);
+        showStep(null, 3);
+      } */
     }
 
   /* Connection Function declaration - End */
@@ -137,50 +180,6 @@ define(["postmonger"], function (Postmonger) {
     connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
     console.log('On go to step (line 70) Method')
     sendDataToPipedream('On go to step (line 70) Method')
-  }
-
-  function initialize(data) {
-    sendDataToPipedream('Calling from Initialize method');
-    console.log('custom activity js - Initialize method')
-    
-    if (data) {
-      payload = data;
-    }
-
-    var message;
-    var hasInArguments = Boolean(
-      payload["arguments"] &&
-        payload["arguments"].execute &&
-        payload["arguments"].execute.inArguments &&
-        payload["arguments"].execute.inArguments.length > 0
-    );
-
-    var inArguments = hasInArguments
-      ? payload["arguments"].execute.inArguments
-      : {};
-
-    $.each(inArguments, function (index, inArgument) {
-      $.each(inArgument, function (key, val) {
-        if (key === "message") {
-          message = val;
-        }
-      });
-    });
-
-    console.log('custom activity js - Initialize method - Ends; Payload at the end ' + JSON.stringify(payload));
-    /* 
-    // If there is no message selected, disable the next button
-    if (!message) {
-      showStep(null, 1);
-      connection.trigger("updateButton", { button: "next", enabled: false });
-      // If there is a message, skip to the summary step
-    } else {
-      $("#select1")
-        .find("option[value=" + message + "]")
-        .attr("selected", "selected");
-      $("#message").html(message);
-      showStep(null, 3);
-    } */
   }
 
   function onGetTokens(tokens) {
