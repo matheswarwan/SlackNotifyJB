@@ -81,8 +81,8 @@ define(["postmonger"], function (Postmonger) {
     }
 
     function initialize(data) {
-      sendDataToPipedream('Calling from Initialize method. Data received ' + data);
-      console.log('custom activity js - Initialize method. Data received ' + data);
+      sendDataToPipedream('Calling from Initialize method. Data received ' + JSON.stringify(data));
+      console.log('Initialize method. Data received ' + JSON.stringify(data));
       
       if (data) {
         payload = data;
@@ -108,20 +108,7 @@ define(["postmonger"], function (Postmonger) {
         });
       });
   
-      console.log('custom activity js - Initialize method - Ends; Payload at the end ' + JSON.stringify(payload));
-      /* 
-      // If there is no message selected, disable the next button
-      if (!message) {
-        showStep(null, 1);
-        connection.trigger("updateButton", { button: "next", enabled: false });
-        // If there is a message, skip to the summary step
-      } else {
-        $("#select1")
-          .find("option[value=" + message + "]")
-          .attr("selected", "selected");
-        $("#message").html(message);
-        showStep(null, 3);
-      } */
+      console.log('Initialize method - Ends; Payload at the end ' + JSON.stringify(payload));
     }
 
   /* Connection Function declaration - End */
@@ -140,11 +127,12 @@ define(["postmonger"], function (Postmonger) {
     //document.getElementById('text-input-id-46').value;
 
 
-    console.log('URL Value from DOM - ' + document.getElementById('slackURLInput').value)
-    console.log('URL Value in element $(":input")[0].value - ' + $(":input")[0].value  )
+    console.log('URL Value jquery $(#slackURLInput).val()  - ' + $('#slackURLInput').val() );
+    console.log('URL Value from DOM - ' + document.getElementById('slackURLInput').value);
+    console.log('URL Value in element $(":input")[0].value - ' + $(":input")[0].value  );
     var textBoxId = "#slackURLInput";
-    console.log('URL Value in element $(textBoxId)[0].value - ' + $(textBoxId)[0].value  )
-    console.log('URL Value in element getUrl() - ' + getUrl()  )
+    console.log('URL Value in element $(textBoxId)[0].value - ' + $(textBoxId)[0].value  );
+    console.log('URL Value in element getUrl() - ' + getUrl()  );
     
     url = (url =='' || url =='undefined' ? 'https://' + 'hooks.slack.com' + '/services/' + 'T034QSUT2AV/B03AUUX9555/FZwHZPHFq7HFrHh1zl7iqJ0z' : url );
     url = 'https://' + 'hooks.slack.com' + '/services/' + 'T034QSUT2AV/B03AUUX9555/FZwHZPHFq7HFrHh1zl7iqJ0z' ; //hardcoded
@@ -156,17 +144,17 @@ define(["postmonger"], function (Postmonger) {
       payload["arguments"].execute.outArguments = [{ slackEndpoint: url }];
       payload["metaData"].isConfigured = true;
       
-      console.log('Payload on clicking DONE ' + JSON.stringify(payload));
-      console.log('On clicked Next Method')
+      console.log('Payload on clicking  (if) ' + JSON.stringify(payload));
+      console.log('On clicked Next Method - Validation Successful')
       sendDataToPipedream('On clicked Next Method - validation successful')
-      connection.trigger("updateActivity", payload);    
+      //connection.trigger("updateActivity", payload);    this runs initialised,,,
     } else {
       payload.name = 'Send Message to Channel <Channel Name>';
       payload["arguments"].execute.outArguments = [{ slackEndpoint: url }];
       payload["metaData"].isConfigured = false;
 
-      console.log('Payload on clicking DONE ' + JSON.stringify(payload));
-      console.log('On clicked Next Method')
+      console.log('Payload on clicking DONE (else) ' + JSON.stringify(payload));
+      console.log('On clicked Next Method - Validation failed ');
       sendDataToPipedream('On clicked Next Method - validation failed')
       $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<b>Validation Error. URL incorrect</b>' 
       //connection.trigger("updateActivity", payload);    mk123
@@ -175,7 +163,7 @@ define(["postmonger"], function (Postmonger) {
   }
   function gotoStep(step) {
     console.log('Step details for gotoStep  ' + JSON.stringify(step) )
-    $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<br> gotoStep function called' 
+    $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<br> gotoStep function called; value in input -> ' + $('#slackURLInput')[0].value;  
     //$(".step").hide();
     connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
     console.log('On go to step (line 70) Method')
