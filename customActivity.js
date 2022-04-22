@@ -74,6 +74,8 @@ define(["postmonger"], function (Postmonger) {
         console.log("Event Listner Added in onRender has " + message)
         console.log("URL IN ON CHANGE AFTER CONNECT TRIGGER " + url)
       });
+
+      
       
       console.log("[custom activity js] On render function ")
       sendDataToPipedream('Calling from OnRender method');
@@ -115,8 +117,8 @@ define(["postmonger"], function (Postmonger) {
 
 
 
-  function clickedNext(step) {
-    console.log('Step details for clickedNext  ' + JSON.stringify(step) )
+  function clickedNext() {
+    console.log('ClickedNext function called. This will "close" the activity. ');
     $(".step")[0].innerHTML = $(".step")[0].innerHTML + '<br> ClickedNext function called. This will "close" the activity.' 
     //connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 
@@ -127,11 +129,11 @@ define(["postmonger"], function (Postmonger) {
     //document.getElementById('text-input-id-46').value;
 
 
-    console.log('URL Value jquery $(#slackURLInput).val()  - ' + $('#slackURLInput').val() );
+    /*console.log('URL Value jquery $(#slackURLInput).val()  - ' + $('#slackURLInput').val() );
     console.log('URL Value from DOM - ' + document.getElementById('slackURLInput').value);
     console.log('URL Value in element $(":input")[0].value - ' + $(":input")[0].value  );
     var textBoxId = "#slackURLInput";
-    console.log('URL Value in element $(textBoxId)[0].value - ' + $(textBoxId)[0].value  );
+    console.log('URL Value in element $(textBoxId)[0].value - ' + $(textBoxId)[0].value  ); */
     console.log('URL Value in element getUrl() - ' + getUrl()  );
     
     url = (url =='' || url =='undefined' ? 'https://' + 'hooks.slack.com' + '/services/' + 'T034QSUT2AV/B03AUUX9555/FZwHZPHFq7HFrHh1zl7iqJ0z' : url );
@@ -225,7 +227,8 @@ function onRequestedTriggerEventDefinition(data) {
   }
 
   function getUrl() {
-    return $("#step1").find("#slackURLInput")[0].value ; 
+    return  $("#step1").find("#slackURLInput").attr("value").trim() + " ---- "  + $("#message")[0].innerHTML;
+    //$("#step1").find("#slackURLInput")[0].value ; 
     //$("#select1").find("slackURLInput").attr("value").trim();
   }
 
