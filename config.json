@@ -28,7 +28,8 @@
 	},
 	"configurationArguments": {
 	  "save": {
-		"url": "https://eo5b8rvigvotl2v.m.pipedream.net/save"
+		"url": "https://eo5b8rvigvotl2v.m.pipedream.net/save",
+		"useJwt": true
 	  },
 	  "publish": {
 		"url": "https://eo5b8rvigvotl2v.m.pipedream.net/publish"
