@@ -1,0 +1,14 @@
+/* Layout only. Controls, colours and type come from the SLDS stylesheet. */
+body { background: var(--slds-g-color-neutral-base-95, #f3f3f3); }
+.sn-shell { max-width: 760px; margin: 0 auto; }
+.sn-help { color: var(--slds-g-color-neutral-base-50, #747474); }
+.sn-template { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.sn-chips { display: flex; flex-wrap: wrap; gap: .25rem; }
+.sn-chip { margin: 0; }
+.sn-source, .sn-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.sn-preview { white-space: pre-wrap; overflow-wrap: anywhere; }
+.sn-narrow { max-width: 12rem; }
+.sn-notice { text-align: left; }
+@media (max-width: 600px) {
+  .sn-source { align-items: flex-start; flex-wrap: wrap; }
+}

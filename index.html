@@ -1,73 +1,12 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Custom Journey Builder Activity</title>
-    <link rel="stylesheet" href="css/button-touch.css">
-    <link rel="stylesheet" href="css/button-index.css">
-    <link rel="stylesheet" href="css/input-index.css">
-    <link rel="stylesheet" href="css/input-index.css">
-    <link rel="stylesheet" href="css/form-element-index.css">
-    <link rel="stylesheet" href="css/form-element-index.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/require.js"></script>
-    <script type="text/javascript">
-      (function () {
-        var config = {
-          baseUrl: "",
-        };
-
-        var dependencies = ["customActivity"];
-
-        require(config, dependencies);
-      })();
-    </script>
-    <!-- <script type="text/javascript" src="customActivity.js"></script> -->
-    <!--Styles-->
-    <style type="text/css">
-      body {
-        padding: 20px;
-        margin: 0;
-      }
-      .step {
-        display: none;
-      }
-      #step1 {
-        display: block;
-      }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slack Notify</title>
   </head>
   <body>
-    <div id="step1" class="step">
-      <input id="slackURLInput" type="text" placeholder="https://hooks.slack.com/services/xxx/yyyv1." />
-     <!--  <div class="slds-form-element">
-        <label class="slds-form-element__label" for="slackURLInput">
-        <abbr class="slds-required" title="required">* </abbr>Slack Webhook API Endpoint</label>
-        <div class="slds-form-element__control">
-        <input type="text" id="slackURLInput" placeholder="https://hooks.slack.com/services/xxx/yyyv3" required="" class="slds-input" />
-        </div>
-      </div>-->
-      <!-- <button class="slds-button slds-button_brand">Brand Button</button> --> 
-    </div>
-    <div id="message"></div>
-    <!--<script type="text/javascript">
-      var url; 
-      const textBoxId = "#slackURLInput";
-      $(textBoxId).change(function() { 
-        url =  $(textBoxId)[0].value;
-        console.log('from Index.html - URL on change - - > '+ url);
-      });
-      console.log("from Index.html - url outside on change - - > " + url);
-      (function () {
-        var config = {
-          baseUrl: "",
-        };
-
-        var dependencies = ["customActivity"];
-
-        require(config, dependencies);
-      })();
-    </script> -->
+    <div id="root"></div>
+    <script type="module" src="/src/web/main.tsx"></script>
   </body>
 </html>
