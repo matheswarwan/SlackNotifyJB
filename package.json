@@ -1,34 +1,32 @@
 {
-    "name": "custom-activity",
-    "version": "0.0.1",
-    "description": "",
-    "private": true,
-    "main": "app.js",
-    "scripts": {
-      "start": "node ./bin/start",
-      "test": "mocha --recursive",
-      "dev": "nodemon ./bin/start"
-    },
-    "dependencies": {
-      "body-parser": "^1.19.0",
-      "cookie-parser": "^1.4.5",
-      "debug": "^4.2.0",
-      "dotenv": "^8.2.0",
-      "express": "^4.17.1",
-      "fuel-rest": "^3.2.2",
-      "helmet": "^4.1.1",
-      "http-errors": "^1.8.0",
-      "jsonwebtoken": "^8.5.1",
-      "morgan": "^1.10.0",
-      "pug": "^3.0.0",
-      "uuid": "^8.3.1",
-      "winston": "^3.3.3"
-    },
-    "devDependencies": {
-      "eslint": "^7.12.1",
-      "eslint-config-airbnb": "^18.2.0",
-      "eslint-plugin-import": "^2.22.1",
-      "eslint-plugin-jsx-a11y": "^6.4.1",
-      "eslint-plugin-react": "^7.21.5"
-    }
+  "name": "sfmc-slack-notify",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "npm run typecheck && vite build",
+    "typecheck": "tsc -p tsconfig.web.json && tsc -p tsconfig.worker.json",
+    "test": "tsx --test tests/*.test.ts",
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy --keep-vars"
+  },
+  "dependencies": {
+    "@salesforce-ux/design-system": "^2.264.1",
+    "postmonger": "0.0.16",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260928.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.0.0",
+    "wrangler": "^4.129.1"
   }
+}

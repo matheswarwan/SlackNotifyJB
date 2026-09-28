@@ -1,0 +1,5 @@
+SLACK_BOT_TOKEN=xoxb-your-bot-token
+JWT_SIGNING_SECRET=your-installed-package-jwt-signing-secret
+APPLICATION_EXTENSION_KEY=your-installed-package-extension-key
+SFMC_SUBDOMAIN=your-tenant-subdomain
+SFMC_ENTERPRISE_ID=
